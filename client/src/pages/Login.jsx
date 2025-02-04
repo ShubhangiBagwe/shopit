@@ -49,6 +49,10 @@ const Login = () => {
           password: "",
         })
         navigate("/")
+
+        // localStorage.setItem('accessToken', response.data.data.accessToken)
+        // localStorage.setItem('refreshToken', response.data.data.refreshToken)
+
       }
 
       // console.log(response, "response")
@@ -75,6 +79,7 @@ const Login = () => {
                 autoFocus
                 className='bg-blue-50 p-2 border rounded outline-none focus-within:border-[#ffbf00]'
                 name='email'
+                id='email'
                 value={data.email}
                 onChange={handleChange}
               />
@@ -88,6 +93,7 @@ const Login = () => {
                   autoFocus
                   className='w-full outline-none'
                   name='password'
+                  id='password'
                   value={data.password}
                   onChange={handleChange}
                 />
@@ -98,7 +104,7 @@ const Login = () => {
                 </div>
               </div>
             </div>
-                  <Link to={"/forgot-password"} className='block ml-auto hover:text-yellow-500'>Forgot Password ?</Link>
+            <Link to={"/forgot-password"} className='block ml-auto hover:text-yellow-500'>Forgot Password ?</Link>
             <button disabled={!valideValue} className={`${valideValue ? "bg-green-800 hover:bg-green-700" : "bg-gray-500"}  text-white py-2 rounded font-semibold`}>Login</button>
           </form>
 

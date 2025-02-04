@@ -45,7 +45,7 @@ const OtpVerification = () => {
         setData(["", "", "", "", "", ""])
         navigate("/reset-password", {
           state: {
-            data: data,
+            data: response.data,
             email: location?.state?.email
           }
         })
