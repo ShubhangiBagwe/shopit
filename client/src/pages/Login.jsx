@@ -5,6 +5,9 @@ import Axios from "../utils/Axios.js"
 import SummaryApi from '../common/SummaryApi.js';
 import AxiosToastError from '../utils/AxiosToastError.js'
 import { Link, useNavigate } from 'react-router-dom';
+import fetchUserDetails from '../utils/fetchUserDetails.js'
+import { useDispatch } from 'react-redux';
+import { setUserDetails } from '../store/userSlice.js';
 
 const Login = () => {
   const [data, setData] = useState({
@@ -12,8 +15,9 @@ const Login = () => {
     password: "",
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
 
 
   const handleChange = (e) => {
@@ -44,6 +48,10 @@ const Login = () => {
 
       if (response.data.success) {
         toast.success(response.data.message)
+
+        const userDetailts = await fetchUserDetails()
+        dispatch(setUserDetails(userDetailts.data.data))
+
         setData({
           email: "",
           password: "",
