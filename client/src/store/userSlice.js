@@ -1,25 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit'
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialValue = {
-    _id: "",
-    name: "",
-    email: "",
-    avatar: "",
-    mobile: "",
-    verify_email: "",
-    last_login_date: "",
-    status: "",
-    address_details: [],
-    shopping_cart: [],
-    orderHistory: [],
-    role: ""
+    _id : "",
+    name : "",
+    email : "",
+    avatar : "",
+    mobile : "",
+    verify_email : "",
+    last_login_date : "",
+    status : "",
+    address_details : [],
+    shopping_cart : [],
+    orderHistory : [],
+    role : "",
 }
 
-const userSlice = createSlice({
-    name: 'user',
-    initialState: initialValue,
-    reducers: {
+const userSlice  = createSlice({
+    name : 'user',
+    initialState : initialValue,
+    reducers : {
         setUserDetails : (state,action) =>{
             state._id = action.payload?._id
             state.name  = action.payload?.name
@@ -33,6 +32,9 @@ const userSlice = createSlice({
             state.shopping_cart = action.payload?.shopping_cart
             state.orderHistory = action.payload?.orderHistory
             state.role = action.payload?.role
+        },
+        updatedAvatar : (state,action)=>{
+            state.avatar = action.payload
         },
         logout : (state,action)=>{
             state._id = ""
@@ -51,7 +53,6 @@ const userSlice = createSlice({
     }
 })
 
-
-export const { setUserDetails,logout } = userSlice.actions
+export const { setUserDetails, logout ,updatedAvatar} = userSlice.actions
 
 export default userSlice.reducer

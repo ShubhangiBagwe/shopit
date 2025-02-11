@@ -6,17 +6,15 @@ import Search from './search';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BsCart4 } from "react-icons/bs";
 import { useSelector } from 'react-redux';
-
-
 import useMobile from '../hooks/useMobile'
-import UsersMenu from './UsersMenu';
+import UserMenu from './UserMenu';
 
 const Header = () => {
     const [isMobile] = useMobile()
     const location = useLocation()
     const navigate = useNavigate()
     const user = useSelector((state) => state?.user)
-    const [openUsersMenu, setOpenUserMenu] = useState(false)
+    const [openUserMenu, setOpenUserMenu] = useState(false)
 
     console.log(user, 'user from store')
 
@@ -28,10 +26,19 @@ const Header = () => {
         navigate("/login")
     }
 
-    const handleCloseUserMenu = ()=>{
+    const handleCloseUserMenu = () => {
         setOpenUserMenu(false)
     }
 
+    const handleMobileUsers = () =>{
+        if(!user._id){
+            navigate("/login")
+            return
+        }
+
+        navigate("/user")
+
+    }
     return (
         <header className='h-24 lg:h-20 lg:shadow-md sticky top-0 flex flex-col justify-center gap-1 bg-white'>
 
@@ -58,42 +65,39 @@ const Header = () => {
 
                     <div>
                         {/* display only in mobile version */}
-                        <button className='text-neutral-600 lg:hidden'>
+                        <button className='text-neutral-600 lg:hidden' onClick={handleMobileUsers}>
                             <FaRegCircleUser size={26} />
                         </button>
 
                         {/* desktop */}
                         <div className='hidden lg:flex items-center gap-10'>
-
                             {
                                 user?._id ? (
                                     <div className='relative'>
-                                        <div onClick={() => setOpenUserMenu(preve => !preve)} className='flex select-none items-center gap-2'>
+                                        <div onClick={() => setOpenUserMenu(preve => !preve)} className='flex select-none items-center gap-1 cursor-pointer'>
                                             <p>Account</p>
                                             {
-                                                openUsersMenu ? (
-                                                    <div>
-                                                        <GoTriangleUp size={25} />
-                                                    </div>
+                                                openUserMenu ? (
+                                                    <GoTriangleUp size={25} />
                                                 ) : (
-                                                    <div>
-                                                        <GoTriangleDown size={25} />
-
-                                                    </div>
+                                                    <GoTriangleDown size={25} />
                                                 )
                                             }
-                                        </div>
-                                        <div className='absolute right-0 top-11'>
-                                            <div className='bg-white  rounded p-4 min-w-52 lg:shadow-lg'>
-                                                <UsersMenu close={handleCloseUserMenu} />
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                ) : (
-                                    <div>
-                                        <button onClick={redirectToLoginPage} className='text-2xl px-2'>Login</button>
+                                        </div>
+                                        {
+                                            openUserMenu && (
+                                                <div className='absolute right-0 top-12'>
+                                                    <div className='bg-white rounded p-4 min-w-52 lg:shadow-lg'>
+                                                        <UserMenu close={handleCloseUserMenu} />
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+
                                     </div>
+                                ) : (
+                                    <button onClick={redirectToLoginPage} className='text-lg px-2'>Login</button>
                                 )
                             }
                             <button className='flex items-center gap-2 bg-green-800 hover:bg-green-700 p-3 text-white rounded-sm'>
