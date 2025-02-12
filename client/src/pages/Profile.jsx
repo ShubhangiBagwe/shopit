@@ -49,8 +49,11 @@ const Profile = () => {
         ...SummaryApi.updateUserDetails,
         data: userData
       })
+      console.log(response,"resssssssssssss")
+
 
       const { data: responseData } = response
+
 
       if (responseData.success) {
         toast.success(responseData.message)
