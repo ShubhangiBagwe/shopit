@@ -44,9 +44,9 @@ const UserMenu = ({ close }) => {
             close()
         }
     }
-    
+
     return (
-        <>
+        <div>
             <div className='text-semibold'>My Account</div>
             <div className='text-sm flex items-center gap-2'>
                 <span className='max-w-52 text-ellipsis line-clamp-1'>{user.name || user.mobile} <span className='text-medium text-red-600'>{user.role === "ADMIN" ? "(Admin)" : ""}</span></span>
@@ -57,11 +57,15 @@ const UserMenu = ({ close }) => {
             <Divider />
 
             <div className='text-sm grid gap-2'>
-                <Link to={"/dashboard/myorder"} className='p-2 hover:bg-orange-200'>My Orders</Link>
-                <Link to={"/dashboard/address"} className='p-2 hover:bg-orange-200'>Save Address</Link>
+                <Link onClick={handleClose} to={"/dashboard/category"} className='p-2 hover:bg-orange-200'>Category</Link>
+                <Link onClick={handleClose} to={"/dashboard/subcategory"} className='p-2 hover:bg-orange-200'>Sub Category</Link>
+                <Link onClick={handleClose} to={"/dashboard/upload-product"} className='p-2 hover:bg-orange-200'>Uploade Product</Link>
+                <Link onClick={handleClose} to={"/dashboard/product"} className='p-2 hover:bg-orange-200'>Product</Link>
+                <Link onClick={handleClose} to={"/dashboard/myorder"} className='p-2 hover:bg-orange-200'>My Orders</Link>
+                <Link onClick={handleClose} to={"/dashboard/address"} className='p-2 hover:bg-orange-200'>Save Address</Link>
                 <button onClick={handleLogout} className='text-left px-2 hover:bg-orange-200 py-1'>Log Out</button>
             </div>
-        </>
+        </div>
     )
 }
 
