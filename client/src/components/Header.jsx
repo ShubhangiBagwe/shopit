@@ -116,7 +116,7 @@ const Header = () => {
 
 
             <div className='container mx-auto px-2 lg:hidden'>
-                <Search />
+                <Search />okkk
             </div>
         </header>
     )
